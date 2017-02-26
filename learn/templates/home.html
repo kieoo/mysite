@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>my test</title>
+</head>
+<body>
+<!--
+<a href="{% url 'add2' 4 5 %}?">计算 4+5</a>
+-->
+ <form method="post" action="/login_in">
+     <input name="username" type="text" placeholder="username"><br>
+     <input name="password" type="text" placeholder="password"><br>
+     <div style="color:red">{{error}}</div><br>
+     <button name="submit" type="submit">login</button><br>
+     {% csrf_token %}
+ </form>
+</body>
+</html>
