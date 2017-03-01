@@ -2,6 +2,8 @@
 # coding:utf-8
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -25,7 +27,8 @@ def add2(request, a, b):
 def login(request):
     user = request.POST.get('username', '')
     passw = request.POST.get('password', '')
-    if user == 'qyke' and passw == '1':
+    user_auth = auth.authenticate(username=user, password=passw)
+    if user_auth is not None:
         # return HttpResponse(u'congratulation')
         response = HttpResponseRedirect('/event_manage/')
         # response.set_cookie('user', user, 3600)
@@ -35,6 +38,7 @@ def login(request):
         return render(request, 'home.html', {'error': 'error password FUCK YOU'})
 
 
+@login_required
 def manage(request):
     # manage_user = request.COOKIES.get('user', '')
     manage_user = request.session.get('user', '')
