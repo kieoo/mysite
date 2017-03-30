@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from learn.models import Event
 
 
 def index(request):
@@ -29,6 +30,7 @@ def login(request):
     passw = request.POST.get('password', '')
     user_auth = auth.authenticate(username=user, password=passw)
     if user_auth is not None:
+        auth.login(request, user_auth)
         # return HttpResponse(u'congratulation')
         response = HttpResponseRedirect('/event_manage/')
         # response.set_cookie('user', user, 3600)
@@ -41,5 +43,7 @@ def login(request):
 @login_required
 def manage(request):
     # manage_user = request.COOKIES.get('user', '')
+    event_list = Event.objects.all()
     manage_user = request.session.get('user', '')
-    return render(request, 'event_manage.html', {'my_word': u'Fuck you also', 'my_user': manage_user})
+    return render(request, 'event_manage.html', {'user': manage_user,
+                                                 'events': event_list})

@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^add2/(\d+)_and_(\d+)/$', learn_views.add2, name='add2'),
     url(r'^admin/', admin.site.urls),
     url(r'^login_in', learn_views.login),
-    url(r'^event_manage/$', learn_views.manage)
+    url(r'^event_manage/$', learn_views.manage),
+    url(r'^accounts/login/$', learn_views.login)
 ]

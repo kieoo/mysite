@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'learn',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -80,11 +81,11 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.146.129',
         'PORT': '3308',
         'NAME': 'guest',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'qyke',
+        'PASSWORD': '1234',
     }
 }
 
