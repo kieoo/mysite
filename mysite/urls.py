@@ -25,5 +25,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login_in', learn_views.login),
     url(r'^event_manage/$', learn_views.manage),
-    url(r'^accounts/login/$', learn_views.login)
+    url(r'^accounts/login/$', learn_views.login),
+    url(r'^search_name/(.*)/$', learn_views.search),
+    url(r'^guest_manage/$', learn_views.guest_manage),
+    url(r'^sign_index/(\d+)/$', learn_views.sign_index),
+    url(r'^sign_index_action/(\d+)/$', learn_views.sign_action)
 ]

@@ -1,10 +1,12 @@
+<!DOCTYPE html>
 <html lang="zh-CN">
-    <head>
-        {% load bootstrap3 %}
-        {% bootstrap_css %}
-        {% bootstrap_javascript %}
-        <title>Guest Manage</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <title>Guest Manage</title>
+</head>
 <body role="document">
     <!-- 导航栏-->
     <nav class="navbar navbar-inverse">
@@ -14,8 +16,8 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                <li class="active"><a href="/event_manage/">发布会</a></li>
-                <li><a href="/guest_manage/">嘉宾</a></li>
+                <li><a href="/event_manage/">发布会</a></li>
+                <li class="active"><a href="/guest_manage/">嘉宾</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">{{user}}</a></li>
@@ -26,7 +28,7 @@
     </nav>
     <!--搜索框--->
     <div class="page-header container">
-     <form class="navbar-form" method="get" action="/search_name/event/">
+     <form class="navbar-form" method="get" action="/search_name/guest/">
                     <div class="form-group">
                     search: <input class="form-control" name="search_name" type="text" placeholder="shut up" />
                     </div>
@@ -39,24 +41,38 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>id</th><th>名称</th><th>状态</th><th>地址</th><th>时间</th>
-                        <th>签到</th>
+                        <th>id</th><th>名称</th><th>手机</th><th>Email</th><th>签到</th>
+                        <th>发布会</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for event in events %}
+                    {% for guest in guests %}
                     <tr>
-                    <td>{{ event.id }}</td>
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.status }}</td>
-                    <td>{{ event.address }}</td>
-                    <td>{{ event.start_time }}</td>
-                    <th><a href="/sign_index/{{ event.id }}/" target="{{ event.id }}_black">sign</a></th>
+                    <td>{{ guest.id }}</td>
+                    <td>{{ guest.realname }}</td>
+                    <td>{{ guest.phone }}</td>
+                    <td>{{ guest.email }}</td>
+                    <td>{{ guest.sign }}</td>
+                    <th>{{ guest.event }}</th>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+    </div>
+    <!-- 列表分页器-->
+    <div class="pagination container" style="width:200px; float:right">
+    <span class="step-links">
+        {% if guests.has_previous %}
+            <a href="?page={{ guests.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+        Page {{ guests.number }} of {{ guests.paginator.num_pages }}
+        </span>
+        {% if guests.has_next %}
+        <a href="?page={{ guests.next_page_number }}">next</a>
+        {% endif %}
+    </span>
     </div>
 </body>
 </html>
